@@ -1,0 +1,739 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.60.2)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Stage", "Reveal_Left", "Reveal_Right"]
+    def Xform "Stage"
+    {
+        reorder nameChildren = ["Plinth_Left", "Plinth_Right"]
+        float3 xformOp:translate = (0, 0, -1.7)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Xform "Plinth_Left"
+        {
+            reorder nameChildren = ["Turntable_Left", "UI_Anchor_Left"]
+            quatf xformOp:orient = (0.984808, 0, 0.173648, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (-0.6, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Xform "Turntable_Left"
+            {
+                reorder nameChildren = ["Podium_Left", "Artefacts_Left"]
+                float3 xformOp:scale = (1, 1, 1)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "HierarchicalFade"
+                {
+                    uniform token info:id = "RealityKit.HierarchicalFade"
+                }
+
+                def Xform "Podium_Left"
+                {
+                    reorder nameChildren = ["Podium_A_Left", "Podium_B_Left", "OnTap_Left"]
+                    float3 xformOp:scale = (1, 1, 1)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                    def "Podium_A_Left" (
+                        active = true
+                        references = @Podium_A.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "Podium_B_Left" (
+                        active = true
+                        references = @Podium_B.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def RealityKitComponent "Collider"
+                    {
+                        uint group = 1
+                        uniform token info:id = "RealityKit.Collider"
+                        uint mask = 4294967295
+                        token type = "Default"
+
+                        def RealityKitStruct "Shape"
+                        {
+                            float3 extent = (0.6, 1.05, 0.6)
+                            float3 position = (0, 0.525, 0)
+                            token shapeType = "Box"
+                        }
+                    }
+
+                    def RealityKitComponent "InputTarget"
+                    {
+                        uniform token info:id = "RealityKit.InputTarget"
+                    }
+
+                    def RealityKitComponent "RCP_BehaviorsContainer"
+                    {
+                        rel behaviors = </Root/Stage/Plinth_Left/Turntable_Left/Podium_Left/OnTap_Left>
+                        uniform token info:id = "RCP.BehaviorsContainer"
+                    }
+
+                    def Preliminary_Behavior "OnTap_Left"
+                    {
+                        rel actions = </Root/Stage/Plinth_Left/Turntable_Left/Podium_Left/OnTap_Left/Action>
+                        uniform bool exclusive
+                        rel triggers = </Root/Stage/Plinth_Left/Turntable_Left/Podium_Left/OnTap_Left/Trigger>
+
+                        def Preliminary_Trigger "Trigger"
+                        {
+                            rel affectedObjects = </Root/Stage/Plinth_Left/Turntable_Left/Podium_Left>
+                            token info:id = "TapGesture"
+                        }
+
+                        def Preliminary_Action "Action"
+                        {
+                            rel affectedObjects = </Root>
+                            rel animationLibraryKey = </Root/Reveal_Left>
+                            rel animationLibraryKeyOverrideKey = </Root/Stage/Plinth_Left/Turntable_Left/Podium_Left/OnTap_Left/Trigger>
+                            token info:id = "PlayTimeline"
+                            int loops = 0
+                            int performCount = 1
+                            token type = "serial"
+                        }
+                    }
+                }
+
+                def Xform "Artefacts_Left"
+                {
+                    reorder nameChildren = ["MyObject_A_Left", "MyObject_B_Left", "MyObject_C_Left", "Installation_Left", "Sparks_Left"]
+                    float3 xformOp:scale = (1, 1, 1)
+                    float3 xformOp:translate = (0, 1.05, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                    def "MyObject_A_Left" (
+                        active = true
+                        references = @MyObject_A.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "MyObject_B_Left" (
+                        active = true
+                        references = @MyObject_B.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "MyObject_C_Left" (
+                        active = true
+                        references = @MyObject_C.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "Installation_Left" (
+                        active = true
+                        references = @Installation.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def Xform "Sparks_Left"
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        float3 xformOp:translate = (0, 0.3, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                        def RealityKitComponent "VFXEmitter"
+                        {
+                            uniform token info:id = "RealityKit.VFXEmitter"
+
+                            def RealityKitStruct "currentState"
+                            {
+                                token birthDirection = "Normal"
+                                token birthLocation = "Surface"
+                                float3 emissionDirection = (0, 1, 0)
+                                double emissionDuration = 1
+                                token emitterShape = "Sphere"
+                                bool isEmitting = 0
+                                bool isLocal = 0
+                                bool loops = 1
+                                float particleSpeed = 0.35
+                                float particleSpeedVariation = 0.15
+
+                                def RealityKitStruct "mainEmitter"
+                                {
+                                    float birthRate = 900
+                                    token blendMode = "Additive"
+                                    float spreadingAngle = 0.6
+
+                                    def RealityKitStruct "color"
+                                    {
+                                        token type = "Evolving"
+
+                                        def RealityKitStruct "start"
+                                        {
+                                            float4 a = (1, 0.95, 0.6, 1)
+                                        }
+
+                                        def RealityKitStruct "end"
+                                        {
+                                            float4 a = (1, 0.35, 0.05, 0)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            def Xform "UI_Anchor_Left"
+            {
+                float3 xformOp:scale = (2, 2, 2)
+                float3 xformOp:translate = (0.7, 1.3, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+        }
+
+        def Xform "Plinth_Right"
+        {
+            reorder nameChildren = ["Turntable_Right", "UI_Anchor_Right"]
+            quatf xformOp:orient = (0.984808, 0, -0.173648, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.6, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Xform "Turntable_Right"
+            {
+                reorder nameChildren = ["Podium_Right", "Artefacts_Right"]
+                float3 xformOp:scale = (1, 1, 1)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "HierarchicalFade"
+                {
+                    uniform token info:id = "RealityKit.HierarchicalFade"
+                }
+
+                def Xform "Podium_Right"
+                {
+                    reorder nameChildren = ["Podium_A_Right", "Podium_B_Right", "OnTap_Right"]
+                    float3 xformOp:scale = (1, 1, 1)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                    def "Podium_A_Right" (
+                        active = true
+                        references = @Podium_A.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "Podium_B_Right" (
+                        active = true
+                        references = @Podium_B.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def RealityKitComponent "Collider"
+                    {
+                        uint group = 1
+                        uniform token info:id = "RealityKit.Collider"
+                        uint mask = 4294967295
+                        token type = "Default"
+
+                        def RealityKitStruct "Shape"
+                        {
+                            float3 extent = (0.6, 1.05, 0.6)
+                            float3 position = (0, 0.525, 0)
+                            token shapeType = "Box"
+                        }
+                    }
+
+                    def RealityKitComponent "InputTarget"
+                    {
+                        uniform token info:id = "RealityKit.InputTarget"
+                    }
+
+                    def RealityKitComponent "RCP_BehaviorsContainer"
+                    {
+                        rel behaviors = </Root/Stage/Plinth_Right/Turntable_Right/Podium_Right/OnTap_Right>
+                        uniform token info:id = "RCP.BehaviorsContainer"
+                    }
+
+                    def Preliminary_Behavior "OnTap_Right"
+                    {
+                        rel actions = </Root/Stage/Plinth_Right/Turntable_Right/Podium_Right/OnTap_Right/Action>
+                        uniform bool exclusive
+                        rel triggers = </Root/Stage/Plinth_Right/Turntable_Right/Podium_Right/OnTap_Right/Trigger>
+
+                        def Preliminary_Trigger "Trigger"
+                        {
+                            rel affectedObjects = </Root/Stage/Plinth_Right/Turntable_Right/Podium_Right>
+                            token info:id = "TapGesture"
+                        }
+
+                        def Preliminary_Action "Action"
+                        {
+                            rel affectedObjects = </Root>
+                            rel animationLibraryKey = </Root/Reveal_Right>
+                            rel animationLibraryKeyOverrideKey = </Root/Stage/Plinth_Right/Turntable_Right/Podium_Right/OnTap_Right/Trigger>
+                            token info:id = "PlayTimeline"
+                            int loops = 0
+                            int performCount = 1
+                            token type = "serial"
+                        }
+                    }
+                }
+
+                def Xform "Artefacts_Right"
+                {
+                    reorder nameChildren = ["MyObject_A_Right", "MyObject_B_Right", "MyObject_C_Right", "Installation_Right", "Sparks_Right"]
+                    float3 xformOp:scale = (1, 1, 1)
+                    float3 xformOp:translate = (0, 1.05, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                    def "MyObject_A_Right" (
+                        active = true
+                        references = @MyObject_A.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "MyObject_B_Right" (
+                        active = true
+                        references = @MyObject_B.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "MyObject_C_Right" (
+                        active = true
+                        references = @MyObject_C.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def "Installation_Right" (
+                        active = true
+                        references = @Installation.usda@
+                    )
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def Xform "Sparks_Right"
+                    {
+                        float3 xformOp:scale = (1, 1, 1)
+                        float3 xformOp:translate = (0, 0.3, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                        def RealityKitComponent "VFXEmitter"
+                        {
+                            uniform token info:id = "RealityKit.VFXEmitter"
+
+                            def RealityKitStruct "currentState"
+                            {
+                                token birthDirection = "Normal"
+                                token birthLocation = "Surface"
+                                float3 emissionDirection = (0, 1, 0)
+                                double emissionDuration = 1
+                                token emitterShape = "Sphere"
+                                bool isEmitting = 0
+                                bool isLocal = 0
+                                bool loops = 1
+                                float particleSpeed = 0.35
+                                float particleSpeedVariation = 0.15
+
+                                def RealityKitStruct "mainEmitter"
+                                {
+                                    float birthRate = 900
+                                    token blendMode = "Additive"
+                                    float spreadingAngle = 0.6
+
+                                    def RealityKitStruct "color"
+                                    {
+                                        token type = "Evolving"
+
+                                        def RealityKitStruct "start"
+                                        {
+                                            float4 a = (1, 0.95, 0.6, 1)
+                                        }
+
+                                        def RealityKitStruct "end"
+                                        {
+                                            float4 a = (1, 0.35, 0.05, 0)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            def Xform "UI_Anchor_Right"
+            {
+                float3 xformOp:scale = (2, 2, 2)
+                float3 xformOp:translate = (0.7, 1.3, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+        }
+    }
+
+    def RealityKitTimeline "Reveal_Left"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3"]
+        uniform token info:id = "CD76276E-AE31-4C95-AC7E-AA847EEAA526"
+
+        def RealityKitTrack "Track"
+        {
+            uniform token info:id = "F97F1691-D232-4364-BC90-84035EC444C6"
+
+            def RealityKitAction "Hide"
+            {
+                string actionKind = "hide"
+                double duration = 0
+                uniform token info:id = "07881BCB-203D-4A30-8C00-DDF8FB372CED"
+                double startTime = 0
+                rel target = </Root/Stage/Plinth_Left/Turntable_Left>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                double duration = 0
+                uniform token info:id = "62908B3D-1239-40B6-8D38-426A0F0107B1"
+                double startTime = 0.5
+                rel target = </Root/Stage/Plinth_Left/Turntable_Left>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Turn_Once"
+            {
+                string actionKind = "spin"
+                token axis = "Yaw"
+                int blendLayer = 400
+                double duration = 10
+                uniform token info:id = "0BC7AD35-7E92-4A98-8721-EDC0E092A4BD"
+                uint64 iterations = 1
+                float revolutions = 1
+                token spinDirection = "Clockwise"
+                double startTime = 4.6
+                rel target = </Root/Stage/Plinth_Left/Turntable_Left>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            uniform token info:id = "BD8D03A3-0181-4506-816B-2C399F5F553C"
+
+            def RealityKitAction "Flatten"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0
+                uniform token info:id = "52516ABC-B60A-4B39-86B7-FB9DB12A303F"
+                token motionType = "None"
+                float3 position = (0, 0, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 0.01, 1)
+                double startTime = 0.3
+                rel target = </Root/Stage/Plinth_Left/Turntable_Left/Podium_Left>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Grow"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 4
+                uniform token info:id = "D21A8EE0-D82E-4931-8969-4A4F787B51FD"
+                token motionType = "None"
+                float3 position = (0, 0, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 1, 1)
+                double startTime = 0.6
+                rel target = </Root/Stage/Plinth_Left/Turntable_Left/Podium_Left>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            uniform token info:id = "A657B54D-3995-4CCE-A2F1-59CD6ADCDFDC"
+
+            def RealityKitAction "Drop_To_Base"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0
+                uniform token info:id = "95B5E72B-96E7-45C7-9F5D-85BD0740F15D"
+                token motionType = "None"
+                float3 position = (0, 0.0105, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 1, 1)
+                double startTime = 0.3
+                rel target = </Root/Stage/Plinth_Left/Turntable_Left/Artefacts_Left>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Ride_To_Top"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 4
+                uniform token info:id = "5C4EAAA3-265D-49AC-8FF9-7ED63079D64D"
+                token motionType = "None"
+                float3 position = (0, 1.05, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 1, 1)
+                double startTime = 0.6
+                rel target = </Root/Stage/Plinth_Left/Turntable_Left/Artefacts_Left>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Reveal_Right"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3"]
+        uniform token info:id = "70AB9B84-39B9-4C19-9F11-3E09CDD73360"
+
+        def RealityKitTrack "Track"
+        {
+            uniform token info:id = "FFDC88C2-DD28-4493-922B-3F3F01218C65"
+
+            def RealityKitAction "Hide"
+            {
+                string actionKind = "hide"
+                double duration = 0
+                uniform token info:id = "69053872-6F7B-4DA8-BE57-B2084C268008"
+                double startTime = 0
+                rel target = </Root/Stage/Plinth_Right/Turntable_Right>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                double duration = 0
+                uniform token info:id = "FEE00F24-981D-48B3-A9A0-0F42FFD5D73A"
+                double startTime = 0.5
+                rel target = </Root/Stage/Plinth_Right/Turntable_Right>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Turn_Once"
+            {
+                string actionKind = "spin"
+                token axis = "Yaw"
+                int blendLayer = 400
+                double duration = 10
+                uniform token info:id = "8FA5186E-1DD3-43D0-81C1-F51FAFBE12BA"
+                uint64 iterations = 1
+                float revolutions = 1
+                token spinDirection = "Clockwise"
+                double startTime = 4.6
+                rel target = </Root/Stage/Plinth_Right/Turntable_Right>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            uniform token info:id = "ACE981C7-A963-486C-B8A0-D5AEBD0A0A54"
+
+            def RealityKitAction "Flatten"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0
+                uniform token info:id = "C061CA7E-9FA4-4F46-9268-271203F25BCC"
+                token motionType = "None"
+                float3 position = (0, 0, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 0.01, 1)
+                double startTime = 0.3
+                rel target = </Root/Stage/Plinth_Right/Turntable_Right/Podium_Right>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Grow"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 4
+                uniform token info:id = "9BFDDA93-4CEA-4590-B28B-3E5624B5CA0C"
+                token motionType = "None"
+                float3 position = (0, 0, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 1, 1)
+                double startTime = 0.6
+                rel target = </Root/Stage/Plinth_Right/Turntable_Right/Podium_Right>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            uniform token info:id = "33932A7E-F72C-44D9-9C01-9B7C83484211"
+
+            def RealityKitAction "Drop_To_Base"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0
+                uniform token info:id = "8DDEE65D-CA70-4C4F-91BB-FE69AC7F1373"
+                token motionType = "None"
+                float3 position = (0, 0.0105, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 1, 1)
+                double startTime = 0.3
+                rel target = </Root/Stage/Plinth_Right/Turntable_Right/Artefacts_Right>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+
+            def RealityKitAction "Ride_To_Top"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 4
+                uniform token info:id = "E3F799A1-6F92-40DE-BAE6-4CDFE207666A"
+                token motionType = "None"
+                float3 position = (0, 1.05, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (1, 1, 1)
+                double startTime = 0.6
+                rel target = </Root/Stage/Plinth_Right/Turntable_Right/Artefacts_Right>
+
+                def RealityKitStruct "transformMode"
+                {
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "linear"
+                }
+            }
+        }
+    }
+}
+

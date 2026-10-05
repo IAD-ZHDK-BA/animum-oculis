@@ -1,0 +1,16 @@
+.DS_Store
+
+**/xcuserdata/
+*.xcuserstate
+*.xcbkptlist
+**/.swiftpm/
+
+build/
+DerivedData/
+*.xcarchive
+
+*.rcuserdata
+**/Package.realitycomposerpro/PluginData/
+**/Package.realitycomposerpro/ProjectData/main.json
+**/Package.realitycomposerpro/WorkspaceData/SceneMetadataList.json
+**/Package.realitycomposerpro/WorkspaceData/Settings.rcprojectdata
